@@ -1,4 +1,4 @@
-### 🏍️ AtlasRide
+# 🏍️ AtlasRide
 ## Plateforme de location de motos et vente d’accessoires
 ## 📌 Description
 
@@ -20,7 +20,7 @@ Fournir un tableau de bord administrateur pour la gestion du système
 Appliquer les concepts d’architecture MVC
 
 ## 👥 Acteurs du système
-# Visiteur
+### Visiteur
 
 Consulter les motos disponibles
 
@@ -28,7 +28,7 @@ Consulter les accessoires
 
 Créer un compte
 
-# Client
+### Client
 
 Se connecter à son compte
 
@@ -38,7 +38,7 @@ Acheter des accessoires
 
 Consulter ses commandes et réservations
 
-# Administrateur
+### Administrateur
 
 Gérer les motos (CRUD)
 
@@ -49,11 +49,11 @@ Gérer les utilisateurs
 Gérer les réservations et commandes
 
 ## ⚙️ Technologies utilisées
-# Backend
+### Backend
 
 PHP (Architecture MVC) ou Laravel
 
-# Frontend
+### Frontend
 
 HTML
 
@@ -115,7 +115,7 @@ reservations → location des motos
 
 commandes → commandes d’accessoires
 
-# Le système implémente plusieurs mesures de sécurité :
+### Le système implémente plusieurs mesures de sécurité :
 
 Hashage des mots de passe (password_hash)
 
@@ -160,7 +160,7 @@ Développement Backend	2 semaines
 Développement Frontend	2 semaines
 Tests	1 semaine
 
-# 👨‍💻 Auteur
+### 👨‍💻 Auteur
 
 Projet réalisé par :
 
