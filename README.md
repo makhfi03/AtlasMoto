@@ -1,59 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### 🏍️ AtlasRide
+## Plateforme de location de motos et vente d’accessoires
+## 📌 Description
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+AtlasRide est une application web développée dans le cadre du Projet de Fin d’Études (PFE) à YouCode.
+Elle permet aux utilisateurs de louer des motos pour une période donnée et d’acheter des accessoires de moto en ligne (casques, gants, vestes, etc.).
 
-## About Laravel
+L’objectif du projet est de proposer une solution simple et efficace pour la gestion des locations de motos, des commandes d’accessoires, ainsi que l’administration de la plateforme.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Objectifs du projet
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Faciliter la location de motos en ligne
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Permettre l’achat d’accessoires de moto
 
-## Learning Laravel
+Offrir une interface simple pour les utilisateurs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Fournir un tableau de bord administrateur pour la gestion du système
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Appliquer les concepts d’architecture MVC
 
-## Laravel Sponsors
+## 👥 Acteurs du système
+# Visiteur
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Consulter les motos disponibles
 
-### Premium Partners
+Consulter les accessoires
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Créer un compte
 
-## Contributing
+# Client
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Se connecter à son compte
 
-## Code of Conduct
+Réserver une moto
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Acheter des accessoires
 
-## Security Vulnerabilities
+Consulter ses commandes et réservations
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Administrateur
 
-## License
+Gérer les motos (CRUD)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Gérer les accessoires (CRUD)
+
+Gérer les utilisateurs
+
+Gérer les réservations et commandes
+
+## ⚙️ Technologies utilisées
+# Backend
+
+PHP (Architecture MVC) ou Laravel
+
+# Frontend
+
+HTML
+
+Tailwind CSS
+
+JavaScript
+
+Base de données
+
+MySQL
+
+Outils
+
+Git & GitHub
+
+Docker
+
+Conception (diagrammes UML)
+
+## 🧱 Architecture du projet
+
+Le projet suit une architecture MVC (Model-View-Controller).
+
+atlasride
+│
+├── app
+│   ├── Controllers
+│   ├── Models
+│   └── Views
+│
+├── core
+│   ├── Database.php
+│   ├── Router.php
+│
+├── public
+│   └── index.php
+│
+├── docker-compose.yml
+└── README.md
+📊 Diagrammes UML
+
+Les diagrammes UML réalisés pour ce projet :
+
+Diagramme de cas d’utilisation
+
+Diagramme de classes
+
+## 🗄️ Base de données
+
+Principales tables du système :
+
+users → gestion des utilisateurs
+
+motos → catalogue des motos
+
+accessoires → produits vendus
+
+reservations → location des motos
+
+commandes → commandes d’accessoires
+
+# Le système implémente plusieurs mesures de sécurité :
+
+Hashage des mots de passe (password_hash)
+
+Vérification des sessions
+
+Protection des routes administrateur
+
+Requêtes SQL préparées
+
+## 📦 Fonctionnalités principales
+Location de motos
+
+consultation des motos
+
+réservation avec dates
+
+vérification de disponibilité
+
+Vente d’accessoires
+
+catalogue produits
+
+panier
+
+validation de commande
+
+Administration
+
+gestion motos
+
+gestion accessoires
+
+gestion utilisateurs
+
+gestion réservations
+
+## 📅 Planning du projet
+Phase	Durée
+Analyse & Cahier des charges	1 semaine
+Conception UML	1 semaine
+Développement Backend	2 semaines
+Développement Frontend	2 semaines
+Tests	1 semaine
+
+# 👨‍💻 Auteur
+
+Projet réalisé par :
+
+Nom : Ghita Makhfi
+Formation : YouCode
+Année : 2026
