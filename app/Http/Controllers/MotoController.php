@@ -21,6 +21,11 @@ class MotoController extends Controller
         return view('welcome', compact('motos'));
     }
 
+    public function show($id)
+    {
+        $moto = Moto::findOrFail($id);
+        return view('motos.show', compact('moto'));
+    }
     public function adminIndex()
     {
         $motos = Moto::all();
@@ -38,7 +43,7 @@ class MotoController extends Controller
             'price_per_day' => 'required|numeric',
         ]);
 
-        \App\Models\Moto::create([
+        Moto::create([
             'name' => $request->name,
             'image' => $request->image,
             'immatriculation' => $request->immatriculation,
