@@ -13,10 +13,11 @@
             background-size: cover;
             background-position: center;
         }
+
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;  
+            -webkit-box-orient: vertical;
             overflow: hidden;
         }
     </style>
@@ -35,32 +36,31 @@
                 <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
                 <a href="{{ route('accessoires.user') }}" class="hover:text-orange-600 transition">Boutique</a>
                 @auth
-                    <a href="#" class="hover:text-orange-600 transition">Mes Commandes</a>
+                <a href="#" class="hover:text-orange-600 transition">Mes Commandes</a>
                 @endauth
             </div>
 
             <div class="flex items-center space-x-4">
                 @auth
-                    <a href="{{ route('panier') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2">
-                        <i class="fas fa-shopping-basket text-lg"></i>
-                        <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
-                    </a>
+                <a href="{{ route('panier') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2">
+                    <i class="fas fa-shopping-basket text-lg"></i>
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+                <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase border-2 border-white">
+                    {{ substr(Auth::user()->firstname, 0, 1) }}
+                </a>
 
-                    <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase hover:scale-110 transition-all border-2 border-white">
-                        {{ substr(Auth::user()->firstname, 0, 1) }}
-                    </a>
-
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="text-gray-400 hover:text-red-600 transition ml-2">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                    </form>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="text-gray-400 hover:text-red-600 transition ml-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
                 @endauth
 
                 @guest
-                    <a href="{{ route('login') }}" class="text-gray-700 font-bold text-[10px] hover:text-orange-600 uppercase tracking-widest italic">Connexion</a>
-                    <a href="{{ route('register') }}" class="bg-orange-600 text-white px-6 py-2 rounded-full font-black text-[10px] hover:bg-black transition shadow-lg uppercase italic tracking-widest">S'inscrire</a>
+                <a href="{{ route('login') }}" class="text-gray-700 font-bold text-[10px] hover:text-orange-600 uppercase tracking-widest italic">Connexion</a>
+                <a href="{{ route('register') }}" class="bg-orange-600 text-white px-6 py-2 rounded-full font-black text-[10px] hover:bg-black transition shadow-lg uppercase italic tracking-widest">S'inscrire</a>
                 @endguest
             </div>
         </div>
@@ -69,15 +69,15 @@
     <header class="hero-gradient h-[85vh] flex items-center justify-center text-center text-white px-4 relative">
         <div class="max-w-4xl">
             @auth
-                <p class="text-orange-500 font-black uppercase tracking-[0.3em] mb-4 italic text-sm">
-                    Ravi de vous revoir, {{ Auth::user()->firstname }} !
-                </p>
+            <p class="text-orange-500 font-black uppercase tracking-[0.3em] mb-4 italic text-sm">
+                Ravi de vous revoir, {{ Auth::user()->firstname }} !
+            </p>
             @endauth
             <h1 class="text-6xl md:text-8xl font-black italic uppercase mb-6 tracking-tighter leading-none">
                 Libérez <span class="text-orange-500">l'Esprit</span> <br> de l'Atlas
             </h1>
-            <p class="text-lg md:text-xl mb-12 text-gray-200 max-w-2xl mx-auto font-medium italic opacity-90">
-                Louez la machine parfaite pour vos expéditions au Maroc ou équipez-vous avec le meilleur matériel technique.
+            <p class="text-lg mb-12 text-gray-200 max-w-2xl mx-auto font-medium italic opacity-90">
+                Louez la machine parfaite pour vos expéditions au Maroc.
             </p>
             <div class="flex flex-col md:flex-row gap-6 justify-center">
                 <a href="{{ route('locations') }}" class="bg-orange-600 hover:bg-white hover:text-black text-white px-12 py-5 rounded-xl font-black uppercase transition-all shadow-2xl italic tracking-widest text-sm">
@@ -121,7 +121,7 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 border-l-8 border-orange-600 pl-8">
             <div>
                 <h2 class="text-5xl font-black text-gray-900 uppercase italic leading-none tracking-tighter">Nos <span class="text-orange-600">Machines</span></h2>
-                <p class="text-gray-400 mt-4 font-bold uppercase tracking-[0.3em] text-[10px] italic">Dominez la route avec nos derniers modèles en stock.</p>
+                <p class="text-gray-400 mt-4 font-bold uppercase tracking-[0.3em] text-[10px] italic">Cliquez sur une moto pour voir les détails.</p>
             </div>
             <a href="{{ route('locations') }}" class="hidden md:flex items-center space-x-3 border-2 border-black px-10 py-4 font-black italic uppercase text-[10px] tracking-widest hover:bg-black hover:text-white transition group">
                 <span>VOIR LE CATALOGUE COMPLET</span>
@@ -132,52 +132,48 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
             @forelse($motos as $moto)
             <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-gray-100">
-                <div class="h-80 overflow-hidden relative">
+
+                <a href="{{ route('moto.show', $moto->id) }}" class="block h-80 overflow-hidden relative">
                     <img src="{{ $moto->image }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
-                    <div class="absolute top-8 left-8 flex flex-col gap-2">
-                        <span class="bg-orange-600 text-white text-[9px] font-black px-5 py-2 rounded-full italic uppercase shadow-xl tracking-widest">
+                    <div class="absolute top-8 left-8">
+                        <span class="bg-orange-600 text-white text-[9px] font-black px-5 py-2 rounded-full italic uppercase tracking-widest">
                             {{ $moto->categorieMoto }}
                         </span>
-                        @if($moto->status == 'disponible')
-                        <span class="bg-black/70 backdrop-blur-md text-white text-[8px] font-black px-4 py-1.5 rounded-full italic uppercase tracking-widest">Prête à partir</span>
-                        @endif
                     </div>
-                </div>
+                </a>
+
                 <div class="p-10">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-2xl font-black italic uppercase text-gray-900 leading-tight">{{ $moto->name }}</h3>
-                    </div>
+                    <a href="{{ route('moto.show', $moto->id) }}">
+                        <h3 class="text-2xl font-black italic uppercase text-gray-900 leading-tight hover:text-orange-600 transition mb-4">
+                            {{ $moto->name }}
+                        </h3>
+                    </a>
+
                     <p class="text-gray-400 text-xs mb-8 font-medium italic leading-relaxed line-clamp-2">
-                        {{ $moto->description ?? "Explorez les paysages grandioses du Maroc au guidon de cette machine d'exception. Confort et puissance garantis." }}
+                        {{ $moto->description }}
                     </p>
+
                     <div class="flex justify-between items-center border-t border-gray-50 pt-8">
                         <div>
                             <span class="text-3xl font-black text-gray-900 italic">{{ $moto->price_per_day }} DH</span>
                             <p class="text-[9px] font-black text-gray-400 uppercase italic tracking-widest">Par jour</p>
                         </div>
-                        
-                        @auth
-                            <a href="{{ route('locations') }}" class="w-16 h-16 bg-black text-white rounded-[1.5rem] flex items-center justify-center hover:bg-orange-600 transition-all duration-300 shadow-2xl transform group-hover:rotate-6 active:scale-90">
-                                <i class="fas fa-plus text-xl"></i>
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" class="w-16 h-16 bg-gray-50 text-gray-300 rounded-[1.5rem] flex items-center justify-center hover:bg-gray-100 transition-all duration-300 shadow-inner group/lock" title="Connectez-vous pour louer">
-                                <i class="fas fa-lock text-xl group-hover/lock:text-orange-600 transition-colors"></i>
-                            </a>
-                        @endauth
+
+                        <a href="{{ route('moto.show', $moto->id) }}" class="w-16 h-16 bg-black text-white rounded-[1.5rem] flex items-center justify-center hover:bg-orange-600 transition-all duration-300 shadow-2xl">
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             @empty
-            <div class="col-span-3 text-center py-20 bg-gray-100 rounded-[3rem] border-2 border-dashed border-gray-200">
-                <i class="fas fa-motorcycle text-5xl text-gray-300 mb-4"></i>
-                <p class="text-gray-400 font-black italic uppercase tracking-widest">Mise à jour de la flotte en cours...</p>
+            <div class="col-span-3 text-center py-20 bg-gray-100 rounded-[3rem]">
+                <p class="text-gray-400 font-black italic uppercase tracking-widest">Aucune moto disponible pour le moment.</p>
             </div>
             @endforelse
         </div>
     </section>
 
-    <footer class="bg-black text-white py-20 border-t-4 border-orange-600">
+    <footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div class="text-center md:text-left">
@@ -192,18 +188,12 @@
                     <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-            <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
-                    &copy; 2026 AtlasMoto Digital Solutions. Built with Laravel.
-                </div>
-                <div class="flex space-x-8 text-[9px] text-gray-400 font-black uppercase italic tracking-widest">
-                    <a href="#" class="hover:text-white transition">CGV</a>
-                    <a href="#" class="hover:text-white transition">Confidentialité</a>
-                    <a href="#" class="hover:text-white transition">Mentions Légales</a>
-                </div>
-            </div>
+        <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
+            &copy; 2026 AtlasMoto Digital Solutions.
+        </div>
         </div>
     </footer>
 
 </body>
+
 </html>
