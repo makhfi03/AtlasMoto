@@ -21,11 +21,14 @@
             <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
                 <i class="fas fa-chart-line text-gray-400 group-hover:text-white"></i> <span>Dashboard</span>
             </a>
-            <a href="{{ route('motos') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+            <a href="{{ route('admin.motos') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
                 <i class="fas fa-motorcycle text-gray-400 group-hover:text-white"></i> <span>Motos</span>
             </a>
             <a href="{{ route('accessoires') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
                 <i class="fas fa-helmet-safety"></i> <span>Accessoires</span>
+            </a>
+            <a href="{{ route('admin.reservations') }}" class="flex items-center space-x-3 p-4 rounded-xl hover:bg-orange-600 hover:text-white transition">
+                <i class="fas fa-calendar-alt text-gray-400 group-hover:text-white"></i><span>Réservations</span>
             </a>
             <a href="{{ route('commandes') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
                 <i class="fas fa-shopping-bag text-gray-400 group-hover:text-white"></i> <span>Commandes</span>
