@@ -9,10 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('accessoires', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->text('description');
+            $table->decimal('prix', 8, 2);
+            $table->string('image');
+            $table->integer('stock')->default(0);
+            $table->string('categorie');
             $table->timestamps();
         });
     }
