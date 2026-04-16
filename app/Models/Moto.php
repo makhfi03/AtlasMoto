@@ -16,4 +16,9 @@ class Moto extends Model
         'price_per_day',
         'status'
     ];
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
 }
