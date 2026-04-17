@@ -28,7 +28,9 @@
                 <a href="/" class="hover:text-orange-600 transition">Accueil</a>
                 <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
                 <a href="{{ route('accessoires.user') }}" class="text-orange-600 border-b-2 border-orange-500">Boutique</a>
-                @auth <a href="#" class="hover:text-orange-600 transition">Mes Commandes</a> @endauth
+                @auth
+                <a href="#" class="hover:text-orange-600 transition">Mes Commandes</a>
+                @endauth
             </div>
 
             <div class="flex items-center space-x-4">
@@ -119,10 +121,13 @@
         </div>
     </section>
 
-    <footer class="bg-black text-white py-12 text-center border-t-4 border-orange-600">
-        <p class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
-            &copy; 2026 AtlasMoto Boutique - Équipement de légende
-        </p>
+    <footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
+        <div class="container mx-auto px-6 text-center">
+            <div class="text-2xl font-black italic uppercase tracking-tighter mb-4 text-orange-600">AtlasMoto</div>
+            <p class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
+                &copy; 2026 AtlasMoto Boutique - Équipement de légende
+            </p>
+        </div>
     </footer>
 
 </body>

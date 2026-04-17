@@ -36,8 +36,7 @@
                 <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
                 <a href="{{ route('accessoires.user') }}" class="hover:text-orange-600 transition">Boutique</a>
                 @auth
-                <a href="#" class="hover:text-orange-600 transition">Mes Commandes</a>
-                @endauth
+                <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a> @endauth
             </div>
 
             <div class="flex items-center space-x-4">
@@ -188,9 +187,9 @@
                     <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-        <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
-            &copy; 2026 AtlasMoto Digital Solutions.
-        </div>
+            <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
+                &copy; 2026 AtlasMoto Digital Solutions.
+            </div>
         </div>
     </footer>
 
