@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,5 +50,12 @@ class User extends Authenticatable
     public function locations()
     {
         return $this->hasMany(Location::class);
+    }
+    public function mesCommandes()
+    {
+        $locations = Location::where('user_id', auth()->id())->with('moto')->latest()->get();
+        $achats = Commande::where('user_id', auth()->id())->latest()->get();
+
+        return view('user.commandes', compact('locations', 'achats'));
     }
 }
