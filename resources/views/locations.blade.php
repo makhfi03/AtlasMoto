@@ -22,7 +22,7 @@
                 <a href="{{ route('locations') }}" class="text-orange-600 border-b-2 border-orange-500">Location</a>
                 <a href="{{ route('accessoires.user') }}" class="hover:text-orange-600 transition">Boutique</a>
                 @auth
-                <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a> @endauth
+                <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a>
                 @endauth
             </div>
 
