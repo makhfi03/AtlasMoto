@@ -47,10 +47,6 @@
                 <a href="{{ route('locations') }}" class="block w-full bg-black text-white py-5 rounded-2xl font-black uppercase italic tracking-widest hover:bg-orange-600 transition-all duration-300 shadow-xl shadow-black/10">
                     Retour au catalogue
                 </a>
-                
-                <button onclick="window.print()" class="text-[10px] font-black uppercase text-gray-400 hover:text-gray-900 transition italic tracking-widest">
-                    <i class="fas fa-print mr-2"></i> Imprimer le reçu
-                </button>
             </div>
         </div>
 
