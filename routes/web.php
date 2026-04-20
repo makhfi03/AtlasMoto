@@ -5,10 +5,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MotoController;
 use App\Http\Controllers\AccessoireController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BoutiqueController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MotoController::class, 'home'])->name('home');
 Route::get('/locations', [MotoController::class, 'locations'])->name('locations');
+Route::get('/location/success', [LocationController::class, 'success'])->name('locations.success');
 
 Route::get('/boutique', function () {
     return "Page Boutique Accessoires";
@@ -26,9 +29,8 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::get('/panier', function () {
-        return "Votre Panier";
-    })->name('panier');
+    Route::post('/panier/ajouter', [BoutiqueController::class, 'ajouterAuPanier'])->name('panier.ajouter');
+    Route::get('/panier', [BoutiqueController::class, 'voirPanier'])->name('panier.index');
 
     Route::get('/mon-profil', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,7 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin/motos/{id}', [MotoController::class, 'update'])->name('motos.update');
     Route::delete('/admin/motos/{moto}', [MotoController::class, 'destroy'])->name('motos.destroy');
 
+    Route::get('/mes-commandes', [UserController::class, 'mesCommandes'])->name('user.commandes');
+    Route::patch('/commandes/{id}/confirmer', [LocationController::class, 'confirmerReception'])->name('commandes.confirmer');
 
+    
     Route::get('/admin/commandes', function () {
         return "Gestion Commandes";
     })->name('commandes');
@@ -65,5 +70,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('/checkout', [LocationController::class, 'checkout'])->name('locations.checkout');
     Route::post('/reserver', [LocationController::class, 'store'])->name('locations.store');
+    Route::post('/paiement', [LocationController::class, 'processPayment'])->name('locations.payment');
+    Route::get('/location/success', [LocationController::class, 'success'])->name('locations.success');
+    Route::get('/boutique/success', [LocationController::class, 'successBoutique'])->name('boutique.success');
+    Route::post('/boutique/checkout', [LocationController::class, 'checkoutBoutique'])->name('boutique.checkout');
 });
