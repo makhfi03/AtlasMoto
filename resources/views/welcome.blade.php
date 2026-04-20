@@ -41,9 +41,17 @@
 
             <div class="flex items-center space-x-4">
                 @auth
-                <a href="{{ route('panier') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2">
-                    <i class="fas fa-shopping-basket text-lg"></i>
-                    <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                <a href="{{ route('panier.index') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2 group">
+                    <i class="fas fa-shopping-basket text-lg group-hover:scale-110 transition-transform"></i>
+                    @if(session('panier') && count(session('panier')) > 0)
+                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white shadow-sm">
+                        {{ count(session('panier')) }}
+                    </span>
+                    @else
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                        0
+                    </span>
+                    @endif
                 </a>
                 <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase border-2 border-white">
                     {{ substr(Auth::user()->firstname, 0, 1) }}
@@ -88,33 +96,6 @@
             </div>
         </div>
     </header>
-
-    <div class="container mx-auto px-6 -mt-16 relative z-10">
-        <div class="bg-white p-8 rounded-3xl shadow-2xl flex flex-wrap gap-8 items-end border border-gray-100">
-            <div class="flex-1 min-w-[200px]">
-                <label class="block text-[10px] font-black text-gray-400 uppercase mb-3 tracking-[0.2em] italic">Point de départ</label>
-                <div class="relative">
-                    <i class="fas fa-map-marker-alt absolute left-0 bottom-3 text-orange-600"></i>
-                    <select class="w-full border-b-2 border-gray-100 py-2 pl-6 focus:border-orange-500 outline-none text-gray-800 font-bold uppercase italic text-xs cursor-pointer bg-transparent">
-                        <option>Marrakech - Agence Centrale</option>
-                        <option>Casablanca - Port</option>
-                        <option>Agadir - Aéroport</option>
-                        <option>Tanger - Marina</option>
-                    </select>
-                </div>
-            </div>
-            <div class="flex-1 min-w-[200px]">
-                <label class="block text-[10px] font-black text-gray-400 uppercase mb-3 tracking-[0.2em] italic">Dates du Roadtrip</label>
-                <div class="relative">
-                    <i class="fas fa-calendar-alt absolute left-0 bottom-3 text-orange-600"></i>
-                    <input type="text" placeholder="Sélectionnez vos dates" class="w-full border-b-2 border-gray-100 py-2 pl-6 focus:border-orange-500 outline-none text-gray-800 font-bold italic text-xs placeholder:font-normal bg-transparent">
-                </div>
-            </div>
-            <button class="bg-black text-white px-12 py-5 rounded-2xl font-black uppercase italic text-[11px] tracking-widest hover:bg-orange-600 transition w-full md:w-auto shadow-xl active:scale-95">
-                VÉRIFIER DISPONIBILITÉ
-            </button>
-        </div>
-    </div>
 
     <section class="py-24 container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 border-l-8 border-orange-600 pl-8">
