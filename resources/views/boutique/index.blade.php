@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,57 +9,67 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        .shop-header { background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1547544289-51c48f219e8c?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center; }
-        [x-cloak] { display: none !important; }
+        .shop-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1547544289-51c48f219e8c?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        [x-cloak] {
+            display: none !important;
+        }
     </style>
 </head>
 
 <body class="bg-gray-50">
 
-    <div class="container mx-auto px-6 mt-6">
-        @if(session('error')) <div class="bg-red-600 text-white p-4 rounded-2xl text-center font-black uppercase mb-4">{{ session('error') }}</div> @endif
-        @if(session('success')) <div class="bg-green-600 text-white p-4 rounded-2xl text-center font-black uppercase mb-4">{{ session('success') }}</div> @endif
-    </div>
-
-<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-gray-800 italic uppercase">
+            <div class="text-2xl font-black text-gray-800 italic uppercase tracking-tighter">
                 Atlas<span class="text-orange-600">Moto</span>
             </div>
 
             <div class="hidden md:flex space-x-8 font-bold text-[11px] text-gray-700 uppercase tracking-widest italic">
-                <a href="/" class="hover:text-orange-600 transition">Accueil</a>
-                <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
+                <a href="{{ route('home') }}" class="hover:text-orange-600 transition">Accueil</a>
                 <a href="{{ route('accessoires.user') }}" class="text-orange-600 border-b-2 border-orange-500">Boutique</a>
                 @auth
-                <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a>
-                @endauth
+                <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
+                <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a> @endauth
             </div>
 
-            <div class="flex items-center space-x-6">
-<a href="{{ route('panier.index') }}" class="relative group" x-data="{ cartCount: {{ session()->has('panier') ? array_sum(array_column(session('panier'), 'quantite')) : 0 }} }">                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-orange-600 transition shadow-sm">
-                        <i class="fas fa-shopping-basket text-xs text-gray-600 group-hover:text-white"></i>
-                    </div>
-                    <template x-if="cartCount > 0">
-                        <span x-text="cartCount" class="absolute -top-1 -right-1 bg-orange-600 text-white text-[8px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm"></span>
-                    </template>
+            <div class="flex items-center space-x-4">
+                @auth
+                <a href="{{ route('panier.index') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2 group">
+                    <i class="fas fa-shopping-basket text-lg group-hover:scale-110 transition-transform"></i>
+                    @if(session('panier') && count(session('panier')) > 0)
+                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white shadow-sm">
+                        {{ count(session('panier')) }}
+                    </span>
+                    @else
+                    <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                        0
+                    </span>
+                    @endif
+                </a>
+                <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase border-2 border-white">
+                    {{ substr(Auth::user()->firstname, 0, 1) }}
                 </a>
 
-                @auth
-                <div class="flex items-center space-x-3 border-l pl-6 border-gray-100">
-                    <span class="text-[10px] font-black uppercase italic hidden sm:block">{{ Auth::user()->firstname }}</span>
-                    <div class="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center font-black italic border-2 border-orange-600 shadow-lg uppercase">
-                        {{ substr(Auth::user()->firstname, 0, 1) }}
-                    </div>
-                </div>
-                @else
-                <a href="/login" class="bg-black text-white px-6 py-2 rounded-full font-bold text-xs hover:bg-orange-600 transition uppercase italic">Connexion</a>
+                <form action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="text-gray-400 hover:text-red-600 transition ml-2">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </form>
                 @endauth
+
+                @guest
+                <a href="{{ route('login') }}" class="text-gray-700 font-bold text-[10px] hover:text-orange-600 uppercase tracking-widest italic">Connexion</a>
+                <a href="{{ route('register') }}" class="bg-orange-600 text-white px-6 py-2 rounded-full font-black text-[10px] hover:bg-black transition shadow-lg uppercase italic tracking-widest">S'inscrire</a>
+                @endguest
             </div>
         </div>
     </nav>
-
-
 
     <header class="shop-header h-[35vh] flex items-center justify-center text-center text-white">
         <h1 class="text-5xl font-black italic uppercase tracking-tighter">L'Équipement <span class="text-orange-500">Pro</span></h1>
@@ -85,17 +96,17 @@
                         <span class="text-xl font-black text-gray-900 italic">{{ number_format($item->prix, 2) }} DH</span>
 
                         @auth
-                            @if($item->stock > 0)
-                                <button @click="open = true" class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center hover:bg-orange-600 transition shadow-xl active:scale-90">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            @else
-                                <button disabled class="w-12 h-12 bg-gray-200 text-gray-400 rounded-2xl flex items-center justify-center cursor-not-allowed">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            @endif
+                        @if($item->stock > 0)
+                        <button @click="open = true" class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center hover:bg-orange-600 transition shadow-xl active:scale-90">
+                            <i class="fas fa-plus"></i>
+                        </button>
                         @else
-                            <a href="{{ route('login') }}" class="w-12 h-12 bg-gray-100 text-gray-300 rounded-2xl flex items-center justify-center"><i class="fas fa-lock"></i></a>
+                        <button disabled class="w-12 h-12 bg-gray-200 text-gray-400 rounded-2xl flex items-center justify-center cursor-not-allowed">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        @endif
+                        @else
+                        <a href="{{ route('login') }}" class="w-12 h-12 bg-gray-100 text-gray-300 rounded-2xl flex items-center justify-center"><i class="fas fa-lock"></i></a>
                         @endauth
                     </div>
                 </div>
@@ -110,8 +121,8 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $item->id }}">
                                 <div class="mb-10">
-                                    <input type="number" name="quantite" value="1" min="1" max="{{ $item->stock }}" 
-                                           class="w-24 text-center bg-gray-50 border border-gray-100 rounded-2xl p-4 font-black text-xl">
+                                    <input type="number" name="quantite" value="1" min="1" max="{{ $item->stock }}"
+                                        class="w-24 text-center bg-gray-50 border border-gray-100 rounded-2xl p-4 font-black text-xl">
                                 </div>
                                 <button type="submit" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase italic hover:bg-orange-600 transition">Confirmer l'ajout</button>
                             </form>
@@ -126,4 +137,5 @@
         </div>
     </section>
 </body>
+
 </html>
