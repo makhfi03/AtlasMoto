@@ -31,7 +31,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         if ($user->role === 'admin') {
-            return redirect('/dashboard');
+            return redirect('/admin/dashboard');
         } else {
             return redirect('/');
         }
@@ -49,7 +49,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect('/dashboard');
+                return redirect('/admin/dashboard');
             } else {
                 return redirect('/');
             }
