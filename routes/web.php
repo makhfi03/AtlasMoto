@@ -7,15 +7,13 @@ use App\Http\Controllers\AccessoireController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoutiqueController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommandeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MotoController::class, 'home'])->name('home');
 Route::get('/locations', [MotoController::class, 'locations'])->name('locations');
 Route::get('/location/success', [LocationController::class, 'success'])->name('locations.success');
-
-Route::get('/boutique', function () {
-    return "Page Boutique Accessoires";
-})->name('accessoires.user');
 
 Route::get('/moto/{id}', [MotoController::class, 'show'])->name('moto.show');
 
@@ -36,10 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
     Route::get('/admin/motos', [MotoController::class, 'adminIndex'])->name('admin.motos');
     Route::post('/admin/motos', [MotoController::class, 'store'])->name('motos.store');
     Route::put('/admin/motos/{id}', [MotoController::class, 'update'])->name('motos.update');
@@ -48,13 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/mes-commandes', [UserController::class, 'mesCommandes'])->name('user.commandes');
     Route::patch('/commandes/{id}/confirmer', [LocationController::class, 'confirmerReception'])->name('commandes.confirmer');
 
-    
-    Route::get('/admin/commandes', function () {
-        return "Gestion Commandes";
-    })->name('commandes');
-    Route::get('/admin/users', function () {
-        return "Gestion Users";
-    })->name('users.admin');
+
+    Route::get('/admin/commandes', [CommandeController::class, 'adminIndex'])->name('commandes');
+
+    Route::get('/admin/users', [UserController::class, 'adminIndex'])->name('users.admin');
 });
 
 Route::get('/boutique', [AccessoireController::class, 'index'])->name('accessoires.user');
@@ -67,6 +58,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::delete('/accessoires/{id}', [AccessoireController::class, 'destroy'])->name('accessoires.destroy');
 
     Route::get('/reservations', [LocationController::class, 'index'])->name('admin.reservations');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
