@@ -137,5 +137,24 @@
         </div>
     </section>
 </body>
-
+<footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+                <div class="text-center md:text-left">
+                    <div class="text-4xl font-black italic mb-4 uppercase tracking-tighter">ATLAS<span class="text-orange-600">MOTO</span></div>
+                    <p class="text-gray-500 max-w-sm mb-6 text-xs italic font-medium leading-relaxed">
+                        L'aventure commence là où s'arrête le bitume. Expert de la location moto et équipement technique au Maroc depuis 2026.
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
+                &copy; 2026 AtlasMoto Digital Solutions.
+            </div>
+        </div>
+    </footer>
 </html>
