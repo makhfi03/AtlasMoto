@@ -13,18 +13,24 @@
 
     <aside class="w-64 bg-black text-white hidden md:flex flex-col sticky top-0 h-screen shadow-2xl">
         <div class="p-8 text-2xl font-black italic uppercase">Atlas<span class="text-orange-600">Moto</span></div>
-        <nav class="flex-1 px-4 mt-4 space-y-2">
-            <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 p-4 rounded-xl text-gray-400 hover:bg-orange-600 hover:text-white transition">
-                <i class="fas fa-th-large text-xs"></i>
-                <span class="font-black uppercase italic text-[10px] tracking-widest">Dashboard</span>
+        <nav class="flex-1 px-4 space-y-2 mt-4 text-sm font-bold uppercase italic text-gray-400">
+            <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+                <i class="fas fa-chart-line text-gray-400 group-hover:text-white"></i> <span>Dashboard</span>
             </a>
-            <a href="{{ route('admin.motos') }}" class="flex items-center space-x-3 p-4 rounded-xl text-gray-400 hover:bg-orange-600 hover:text-white transition">
-                <i class="fas fa-motorcycle text-xs"></i>
-                <span class="font-black uppercase italic text-[10px] tracking-widest">Gestion Motos</span>
+            <a href="{{ route('admin.motos') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+                <i class="fas fa-motorcycle text-gray-400 group-hover:text-white"></i> <span>Motos</span>
             </a>
-            <a href="{{ route('admin.reservations') }}" class="flex items-center space-x-3 p-4 rounded-xl bg-orange-600 text-white shadow-lg">
-                <i class="fas fa-calendar-alt text-xs"></i>
-                <span class="font-black uppercase italic text-[10px] tracking-widest">Réservations</span>
+            <a href="{{ route('accessoires') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+                <i class="fas fa-helmet-safety"></i> <span>Accessoires</span>
+            </a>
+            <a href="{{ route('admin.reservations') }}" class="flex items-center space-x-3 p-4 rounded-xl hover:bg-orange-600 hover:text-white transition">
+                <i class="fas fa-calendar-alt text-gray-400 group-hover:text-white"></i><span>Réservations</span>
+            </a>
+            <a href="{{ route('commandes') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+                <i class="fas fa-shopping-bag text-gray-400 group-hover:text-white"></i> <span>Commandes</span>
+            </a>
+            <a href="{{ route('users.admin') }}" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-orange-600 transition font-bold group italic">
+                <i class="fas fa-users text-gray-400 group-hover:text-white"></i> <span>Utilisateurs</span>
             </a>
         </nav>
     </aside>
@@ -105,7 +111,6 @@
             </div>
         </main>
     </div>
-
 </body>
 
 </html>
