@@ -33,9 +33,9 @@
 
             <div class="hidden md:flex space-x-8 font-bold text-[11px] text-gray-700 uppercase tracking-widest italic">
                 <a href="{{ route('home') }}" class="text-orange-600 border-b-2 border-orange-500">Accueil</a>
-                <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
                 <a href="{{ route('accessoires.user') }}" class="hover:text-orange-600 transition">Boutique</a>
                 @auth
+                <a href="{{ route('locations') }}" class="hover:text-orange-600 transition">Location</a>
                 <a href="{{ route('user.commandes') }}" class="hover:text-orange-600 transition">Mes commandes</a> @endauth
             </div>
 
@@ -103,16 +103,17 @@
                 <h2 class="text-5xl font-black text-gray-900 uppercase italic leading-none tracking-tighter">Nos <span class="text-orange-600">Machines</span></h2>
                 <p class="text-gray-400 mt-4 font-bold uppercase tracking-[0.3em] text-[10px] italic">Cliquez sur une moto pour voir les détails.</p>
             </div>
+            @auth
             <a href="{{ route('locations') }}" class="hidden md:flex items-center space-x-3 border-2 border-black px-10 py-4 font-black italic uppercase text-[10px] tracking-widest hover:bg-black hover:text-white transition group">
                 <span>VOIR LE CATALOGUE COMPLET</span>
                 <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform text-orange-600"></i>
             </a>
+            @endauth
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-            @forelse($motos as $moto)
-            <div class="bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-gray-100">
-
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="motoContainer">
+            @forelse($motos as $index => $moto)
+            <div class="moto-item {{ $index >= 3 ? 'hidden' : '' }} bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-gray-100">
                 <a href="{{ route('moto.show', $moto->id) }}" class="block h-80 overflow-hidden relative">
                     <img src="{{ $moto->image }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
                     <div class="absolute top-8 left-8">
@@ -151,6 +152,16 @@
             </div>
             @endforelse
         </div>
+
+        @guest
+        @if($motos->count() > 3)
+        <div class="text-center mt-16" id="containerBtn">
+            <button onclick="showMore()" class="bg-black text-white px-12 py-5 rounded-2xl font-black italic uppercase text-xs hover:bg-orange-600 transition shadow-xl">
+                VOIR PLUS DE MOTOS
+            </button>
+        </div>
+        @endif
+        @endguest
     </section>
 
     <footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
@@ -174,6 +185,20 @@
         </div>
     </footer>
 
+    <script>
+        function showMore() {
+            const hiddenMotos = document.querySelectorAll('.moto-item.hidden');
+            const containerBtn = document.getElementById('containerBtn');
+
+            hiddenMotos.forEach(moto => {
+                moto.classList.remove('hidden');
+            });
+
+            if (containerBtn) {
+                containerBtn.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 </html>
