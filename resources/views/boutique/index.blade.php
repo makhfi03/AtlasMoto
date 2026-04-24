@@ -71,7 +71,7 @@
         </div>
     </nav>
 
-    <header class="shop-header h-[35vh] flex items-center justify-center text-center text-white">
+    <header class="bg-black shop-header h-[35vh] flex items-center justify-center text-center text-white">
         <h1 class="text-5xl font-black italic uppercase tracking-tighter">L'Équipement <span class="text-orange-500">Pro</span></h1>
     </header>
 
