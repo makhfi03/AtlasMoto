@@ -72,3 +72,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/panier/supprimer/{id}', [App\Http\Controllers\BoutiqueController::class, 'supprimer'])->name('panier.supprimer');
