@@ -10,16 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class MotoController extends Controller
 {
-    public function index() {
-    $motos = Moto::all();
-    foreach($motos as $moto) {
-        $moto->dates_occupées = Location::where('moto_id', $moto->id)
-            ->where('statut', 'confirmee')
-            ->select('date_debut', 'date_fin')
-            ->get();
+    public function index()
+    {
+        $motos = Moto::all();
+        foreach ($motos as $moto) {
+            $moto->dates_occupées = Location::where('moto_id', $moto->id)
+                ->where('statut', 'confirmee')
+                ->select('date_debut', 'date_fin')
+                ->get();
+        }
+        return view('locations', compact('motos'));
     }
-    return view('locations', compact('motos'));
-}
 
     public function home()
     {
@@ -90,12 +91,13 @@ class MotoController extends Controller
 
     public function locations(Request $request)
     {
-        $query = Moto::query();
-        if ($request->has('categorie') && $request->categorie !== 'all') {
-            $query->where('categorieMoto', $request->categorie);
-        }
+        $categorieSelect = $request->query('categorie', 'tout');
 
+        $query = Moto::query();
+        if ($categorieSelect !== 'tout') {
+            $query->where('categorieMoto', 'like', '%' . $categorieSelect . '%');
+        }
         $motos = $query->get();
-        return view('locations', compact('motos'));
+        return view('locations', compact('motos', 'categorieSelect'));
     }
 }

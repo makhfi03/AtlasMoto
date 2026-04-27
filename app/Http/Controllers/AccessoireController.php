@@ -9,10 +9,19 @@ use Illuminate\Support\Facades\Storage;
 class AccessoireController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $accessoires = Accessoire::all();
-        return view('boutique.index', compact('accessoires'));
+        $categorieSelect = $request->query('categorie', 'tout');
+
+        $query = Accessoire::query();
+
+        if ($categorieSelect !== 'tout') {
+            $query->where('categorie', $categorieSelect);
+        }
+
+        $accessoires = $query->get();
+
+        return view('boutique.index', compact('accessoires', 'categorieSelect'));
     }
 
     public function show($id)
