@@ -14,10 +14,7 @@
             background-size: cover;
             background-position: center;
         }
-
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
     </style>
 </head>
 
@@ -42,27 +39,12 @@
                 <a href="{{ route('panier.index') }}" class="text-gray-700 hover:text-orange-600 relative transition mr-2 group">
                     <i class="fas fa-shopping-basket text-lg group-hover:scale-110 transition-transform"></i>
                     @if(session('panier') && count(session('panier')) > 0)
-                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white shadow-sm">
-                        {{ count(session('panier')) }}
-                    </span>
-                    @else
-                    <span class="absolute -top-2 -right-2 bg-black text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-                        0
-                    </span>
+                    <span class="absolute -top-2 -right-2 bg-orange-600 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-white shadow-sm">{{ count(session('panier')) }}</span>
                     @endif
                 </a>
-                <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase border-2 border-white">
-                    {{ substr(Auth::user()->firstname, 0, 1) }}
-                </a>
-
-                <form action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="text-gray-400 hover:text-red-600 transition ml-2">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </form>
+                <a href="{{ route('profile.show') }}" class="w-10 h-10 bg-orange-600 text-white rounded-full flex items-center justify-center font-black italic shadow-lg uppercase border-2 border-white">{{ substr(Auth::user()->firstname, 0, 1) }}</a>
+                <form action="{{ route('logout') }}" method="POST" class="inline">@csrf <button type="submit" class="text-gray-400 hover:text-red-600 transition ml-2"><i class="fas fa-sign-out-alt"></i></button></form>
                 @endauth
-
                 @guest
                 <a href="{{ route('login') }}" class="text-gray-700 font-bold text-[10px] hover:text-orange-600 uppercase tracking-widest italic">Connexion</a>
                 <a href="{{ route('register') }}" class="bg-orange-600 text-white px-6 py-2 rounded-full font-black text-[10px] hover:bg-black transition shadow-lg uppercase italic tracking-widest">S'inscrire</a>
@@ -74,6 +56,18 @@
     <header class="bg-black shop-header h-[35vh] flex items-center justify-center text-center text-white">
         <h1 class="text-5xl font-black italic uppercase tracking-tighter">L'Équipement <span class="text-orange-500">Pro</span></h1>
     </header>
+
+    <section class="container mx-auto px-6 mt-12">
+        <div class="flex flex-wrap gap-4">
+            @foreach(['tout', 'casques', 'gants', 'Bagagerie', 'Protections'] as $cat)
+            <a href="{{ route('accessoires.user', ['categorie' => $cat]) }}" 
+               class="border-2 px-6 py-2 rounded-full font-black italic uppercase text-[10px] tracking-widest transition 
+               {{ ($categorieSelect ?? 'tout') === $cat ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-gray-700 border-gray-200 hover:border-orange-600' }}">
+                {{ ucfirst($cat) }}
+            </a>
+            @endforeach
+        </div>
+    </section>
 
     <section class="py-16 container mx-auto px-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -94,16 +88,11 @@
 
                     <div class="flex justify-between items-center border-t border-gray-50 pt-6">
                         <span class="text-xl font-black text-gray-900 italic">{{ number_format($item->prix, 2) }} DH</span>
-
                         @auth
                         @if($item->stock > 0)
-                        <button @click="open = true" class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center hover:bg-orange-600 transition shadow-xl active:scale-90">
-                            <i class="fas fa-plus"></i>
-                        </button>
+                        <button @click="open = true" class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center hover:bg-orange-600 transition shadow-xl active:scale-90"><i class="fas fa-plus"></i></button>
                         @else
-                        <button disabled class="w-12 h-12 bg-gray-200 text-gray-400 rounded-2xl flex items-center justify-center cursor-not-allowed">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        <button disabled class="w-12 h-12 bg-gray-200 text-gray-400 rounded-2xl flex items-center justify-center cursor-not-allowed"><i class="fas fa-times"></i></button>
                         @endif
                         @else
                         <a href="{{ route('login') }}" class="w-12 h-12 bg-gray-100 text-gray-300 rounded-2xl flex items-center justify-center"><i class="fas fa-lock"></i></a>
@@ -120,10 +109,7 @@
                             <form action="{{ route('panier.ajouter') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $item->id }}">
-                                <div class="mb-10">
-                                    <input type="number" name="quantite" value="1" min="1" max="{{ $item->stock }}"
-                                        class="w-24 text-center bg-gray-50 border border-gray-100 rounded-2xl p-4 font-black text-xl">
-                                </div>
+                                <div class="mb-10"><input type="number" name="quantite" value="1" min="1" max="{{ $item->stock }}" class="w-24 text-center bg-gray-50 border border-gray-100 rounded-2xl p-4 font-black text-xl"></div>
                                 <button type="submit" class="w-full bg-black text-white py-5 rounded-2xl font-black uppercase italic hover:bg-orange-600 transition">Confirmer l'ajout</button>
                             </form>
                         </div>
@@ -132,19 +118,17 @@
                 @endif
             </div>
             @empty
-            <div class="col-span-full text-center py-20 opacity-30">Stock vide</div>
+            <div class="col-span-full text-center py-20 opacity-30">Aucun accessoire trouvé.</div>
             @endforelse
         </div>
     </section>
-</body>
-<footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
+
+    <footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div class="text-center md:text-left">
                     <div class="text-4xl font-black italic mb-4 uppercase tracking-tighter">ATLAS<span class="text-orange-600">MOTO</span></div>
-                    <p class="text-gray-500 max-w-sm mb-6 text-xs italic font-medium leading-relaxed">
-                        L'aventure commence là où s'arrête le bitume. Expert de la location moto et équipement technique au Maroc depuis 2026.
-                    </p>
+                    <p class="text-gray-500 max-w-sm mb-6 text-xs italic font-medium leading-relaxed">L'aventure commence là où s'arrête le bitume.</p>
                 </div>
                 <div class="flex space-x-6">
                     <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-instagram"></i></a>
@@ -152,9 +136,9 @@
                     <a href="#" class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center hover:bg-orange-600 transition"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-            <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">
-                &copy; 2026 AtlasMoto Digital Solutions.
-            </div>
+            <div class="text-[9px] text-gray-600 uppercase font-black tracking-[0.4em] italic">&copy; 2026 AtlasMoto Digital Solutions.</div>
         </div>
     </footer>
+
+</body>
 </html>
