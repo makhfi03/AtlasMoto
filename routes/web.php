@@ -9,9 +9,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [MotoController::class, 'home'])->name('home');
+// Route::get('/', [MotoController::class, 'home'])->name('home');
 Route::get('/locations', [MotoController::class, 'locations'])->name('locations');
 Route::get('/location/success', [LocationController::class, 'success'])->name('locations.success');
 
@@ -69,3 +70,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/boutique/success', [LocationController::class, 'successBoutique'])->name('boutique.success');
     Route::post('/boutique/checkout', [LocationController::class, 'checkoutBoutique'])->name('boutique.checkout');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');

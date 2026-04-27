@@ -103,17 +103,21 @@
                 <h2 class="text-5xl font-black text-gray-900 uppercase italic leading-none tracking-tighter">Nos <span class="text-orange-600">Machines</span></h2>
                 <p class="text-gray-400 mt-4 font-bold uppercase tracking-[0.3em] text-[10px] italic">Cliquez sur une moto pour voir les détails.</p>
             </div>
-            @auth
-            <a href="{{ route('locations') }}" class="hidden md:flex items-center space-x-3 border-2 border-black px-10 py-4 font-black italic uppercase text-[10px] tracking-widest hover:bg-black hover:text-white transition group">
-                <span>VOIR LE CATALOGUE COMPLET</span>
-                <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform text-orange-600"></i>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mb-12">
+            @foreach(['tout', 'sport', 'trail', 'scooter'] as $cat)
+            <a href="{{ route('home', ['categorie' => $cat]) }}" 
+               class="border-2 px-6 py-2 rounded-full font-black italic uppercase text-[10px] tracking-widest transition 
+               {{ ($categorieSelect ?? 'tout') === $cat ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-gray-700 border-gray-200 hover:border-orange-600' }}">
+                {{ ucfirst($cat) }}
             </a>
-            @endauth
+            @endforeach
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="motoContainer">
             @forelse($motos as $index => $moto)
-            <div class="moto-item {{ $index >= 3 ? 'hidden' : '' }} bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-gray-100">
+            <div class="moto-item {{ (($categorieSelect ?? 'tout') === 'tout' && $index >= 3) ? 'hidden' : '' }} bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-gray-100">
                 <a href="{{ route('moto.show', $moto->id) }}" class="block h-80 overflow-hidden relative">
                     <img src="{{ $moto->image }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
                     <div class="absolute top-8 left-8">
@@ -153,15 +157,13 @@
             @endforelse
         </div>
 
-        @guest
-        @if($motos->count() > 3)
+        @if(($categorieSelect ?? 'tout') === 'tout' && $motos->count() > 3)
         <div class="text-center mt-16" id="containerBtn">
             <button onclick="showMore()" class="bg-black text-white px-12 py-5 rounded-2xl font-black italic uppercase text-xs hover:bg-orange-600 transition shadow-xl">
                 VOIR PLUS DE MOTOS
             </button>
         </div>
         @endif
-        @endguest
     </section>
 
     <footer class="bg-black text-white py-10 text-center border-t-4 border-orange-600">
