@@ -51,6 +51,18 @@
         <i class="fas fa-motorcycle absolute -right-10 -bottom-10 text-[12rem] text-white/5 -rotate-12"></i>
     </section>
 
+    <div class="container mx-auto px-6 mt-12">
+        <div class="flex flex-wrap gap-4">
+            @foreach(['tout', 'sport', 'trail', 'scooter'] as $cat)
+            <a href="{{ route('locations', ['categorie' => $cat]) }}" 
+               class="border-2 px-6 py-2 rounded-full font-black italic uppercase text-[10px] tracking-widest transition 
+               {{ ($categorieSelect ?? 'tout') === $cat ? 'bg-orange-600 text-white border-orange-600' : 'bg-white text-gray-700 border-gray-200 hover:border-orange-600' }}">
+                {{ ucfirst($cat) }}
+            </a>
+            @endforeach
+        </div>
+    </div>
+
     <div class="container mx-auto px-6 mt-8">
         @if(session('error'))
         <div class="bg-red-600 text-white p-4 rounded-2xl font-black italic uppercase text-[10px] tracking-widest shadow-xl mb-6">
