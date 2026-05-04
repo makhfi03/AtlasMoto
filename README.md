@@ -3,11 +3,22 @@
 ## 📌 Description
 
 AtlasRide est une application web développée dans le cadre du Projet de Fin d’Études (PFE) à YouCode.
-Elle permet aux utilisateurs de louer des motos pour une période donnée et d’acheter des accessoires de moto en ligne (casques, gants, vestes, etc.).
+Elle permet aux utilisateurs de louer des motos pour une période donnée et d’acheter des accessoires de moto en ligne (casques, gants, etc.).
 
 L’objectif du projet est de proposer une solution simple et efficace pour la gestion des locations de motos, des commandes d’accessoires, ainsi que l’administration de la plateforme.
 
-## 🎯 Objectifs du projet
+## Fonctionnalités principales
+Location de motos : Réservation en ligne avec système de vérification des disponibilités.
+
+Boutique d'accessoires : Catalogue complet avec système de panier et gestion des stocks.
+
+Gestion des commandes : Suivi des locations et achats en temps réel.
+
+Interface Administrateur : Gestion du parc moto, des accessoires et des utilisateurs.
+
+Authentification : Système de connexion sécurisé pour les clients.
+
+## Objectifs du projet
 
 Faciliter la location de motos en ligne
 
@@ -19,7 +30,7 @@ Fournir un tableau de bord administrateur pour la gestion du système
 
 Appliquer les concepts d’architecture MVC
 
-## 👥 Acteurs du système
+## Acteurs du système
 ### Visiteur
 
 Consulter les motos disponibles
@@ -48,60 +59,19 @@ Gérer les utilisateurs
 
 Gérer les réservations et commandes
 
-## ⚙️ Technologies utilisées
-### Backend
+## Technologies utilisées
 
-PHP (Architecture MVC) ou Laravel
+Framework : Laravel 10/11
 
-### Frontend
+Base de données : MySQL
 
-HTML
+Frontend : Tailwind CSS, Alpine.js
 
-Tailwind CSS
+Paiement : Stripe API (Intégration)
 
-JavaScript
+Architecture : MVC (Model-View-Controller)
 
-Base de données
-
-MySQL
-
-Outils
-
-Git & GitHub
-
-Docker
-
-Conception (diagrammes UML)
-
-## 🧱 Architecture du projet
-
-Le projet suit une architecture MVC (Model-View-Controller).
-
-atlasride
-│
-├── app
-│   ├── Controllers
-│   ├── Models
-│   └── Views
-│
-├── core
-│   ├── Database.php
-│   ├── Router.php
-│
-├── public
-│   └── index.php
-│
-├── docker-compose.yml
-└── README.md
-📊 Diagrammes UML
-
-Les diagrammes UML réalisés pour ce projet :
-
-Diagramme de cas d’utilisation
-
-Diagramme de classes
-
-## 🗄️ Base de données
+## Base de données
 
 Principales tables du système :
 
@@ -109,11 +79,13 @@ users → gestion des utilisateurs
 
 motos → catalogue des motos
 
-accessoires → produits vendus
+locations → L'historique des réservations de motos
 
-reservations → location des motos
+accessoires → catalogue des produits de la boutique
 
-commandes → commandes d’accessoires
+commandes → gère les achats d'accessoires
+
+commande_items → lien entre une commande et les accessoires achetés (Table pivot)
 
 ### Le système implémente plusieurs mesures de sécurité :
 
@@ -125,7 +97,8 @@ Protection des routes administrateur
 
 Requêtes SQL préparées
 
-## 📦 Fonctionnalités principales
+## Fonctionnalités principales
+
 Location de motos
 
 consultation des motos
@@ -152,15 +125,7 @@ gestion utilisateurs
 
 gestion réservations
 
-## 📅 Planning du projet
-Phase	Durée
-Analyse & Cahier des charges	1 semaine
-Conception UML	1 semaine
-Développement Backend	2 semaines
-Développement Frontend	2 semaines
-Tests	1 semaine
-
-### 👨‍💻 Auteur
+### Auteur
 
 Projet réalisé par :
 
