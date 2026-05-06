@@ -158,15 +158,19 @@ class LocationController extends Controller
     if (!$panier || !$data) return redirect()->route('home');
 
     $mode = $data['shipping_type'] ?? 'retrait';
-    Commande::create([
+
+    $commande = Commande::create([
         'user_id' => auth()->id(),
-        'items' => $panier,
         'total' => $data['total'],
         'mode_reception' => $mode,
         'statut' => ($mode === 'livraison') ? 'en cours' : 'payé'
     ]);
 
     foreach ($panier as $id => $item) {
+        $commande->accessoires()->attach($id, [
+            'quantite' => $item['quantite']
+        ]);
+
         $accessoire = Accessoire::find($id);
         if ($accessoire) {
             $accessoire->stock -= $item['quantite'];
