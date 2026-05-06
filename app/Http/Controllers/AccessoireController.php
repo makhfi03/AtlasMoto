@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Accessoire;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class AccessoireController extends Controller
 {

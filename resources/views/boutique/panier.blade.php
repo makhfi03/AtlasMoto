@@ -105,11 +105,8 @@
     </main>
 
     <script>
-        const sousTotalInitial = {
-            {
-                $total
-            }
-        };
+
+        const sousTotalInitial = {{ $total }};
 
         function updateTotal(frais) {
             const total = sousTotalInitial + frais;

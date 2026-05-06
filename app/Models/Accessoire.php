@@ -14,4 +14,10 @@ class Accessoire extends Model
         'categorie',
         'image'
     ];
+
+    public function commandes()
+    {
+        return $this->belongsToMany(Commande::class, 'accessoire_commande')
+            ->withPivot('quantite');
+    }
 }
