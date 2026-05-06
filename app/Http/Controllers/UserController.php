@@ -17,7 +17,8 @@ class UserController extends Controller
             ->latest()
             ->get();
 
-        $achats = Commande::where('user_id', auth()->id())
+        $achats = Commande::with('accessoires')
+            ->where('user_id', auth()->id())
             ->latest()
             ->get();
 
