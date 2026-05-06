@@ -8,7 +8,6 @@ class Commande extends Model
 {
     protected $fillable = [
         'user_id',
-        'items',
         'total',
         'mode_reception',
         'statut'

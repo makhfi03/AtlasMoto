@@ -82,10 +82,9 @@
 
                 <div class="flex items-center space-x-6 flex-1">
                     <div class="flex -space-x-4">
-                        @php $items = is_array($achat->items) ? $achat->items : json_decode($achat->items, true); @endphp
-                        @foreach(array_slice($items, 0, 3) as $item)
+                        @foreach($achat->accessoires->take(3) as $item)
                         <div class="w-16 h-16 bg-gray-50 rounded-2xl border-4 border-white overflow-hidden shadow-sm flex items-center justify-center">
-                            <img src="{{ $item['image'] }}" class="w-full h-full object-contain p-1">
+                            <img src="{{ $item->image }}" class="w-full h-full object-contain p-1">
                         </div>
                         @endforeach
                     </div>
@@ -93,7 +92,7 @@
                         <span class="text-[8px] font-black uppercase text-gray-400 tracking-widest">Achat Boutique</span>
                         <h3 class="text-lg font-black uppercase italic">Commande #ACC-{{ $achat->id }}</h3>
                         <p class="text-[10px] font-bold text-gray-400 italic">
-                            {{ count($items) }} article(s) • {{ $achat->mode_reception == 'livraison' ? 'Livraison' : 'Retrait Magasin' }}
+                            {{ $achat->accessoires->count() }} article(s) • {{ $achat->mode_reception == 'livraison' ? 'Livraison' : 'Retrait Magasin' }}
                         </p>
                     </div>
                 </div>
@@ -110,22 +109,22 @@
 
                 <div class="min-w-[160px] flex flex-col items-center md:items-end gap-2">
                     @if($achat->mode_reception == 'livraison')
-                    @if($achat->statut == 'livré')
-                    <span class="bg-green-100 text-green-600 px-6 py-2 rounded-full text-[8px] font-black uppercase italic tracking-widest border border-green-200">
-                        <i class="fas fa-check mr-1"></i> Produit Livré
-                    </span>
-                    @else
-                    <span class="bg-orange-100 text-orange-600 px-6 py-2 rounded-full text-[8px] font-black uppercase italic tracking-widest border border-orange-200">
-                        Livraison en cours
-                    </span>
-                    <form action="{{ route('commandes.confirmer', $achat->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button type="submit" class="text-[7px] font-black uppercase text-gray-400 hover:text-orange-600 transition tracking-tighter underline">
-                            Confirmer la réception ?
-                        </button>
-                    </form>
-                    @endif
+                        @if($achat->statut == 'livré')
+                        <span class="bg-green-100 text-green-600 px-6 py-2 rounded-full text-[8px] font-black uppercase italic tracking-widest border border-green-200">
+                            <i class="fas fa-check mr-1"></i> Produit Livré
+                        </span>
+                        @else
+                        <span class="bg-orange-100 text-orange-600 px-6 py-2 rounded-full text-[8px] font-black uppercase italic tracking-widest border border-orange-200">
+                            Livraison en cours
+                        </span>
+                        <form action="{{ route('commandes.confirmer', $achat->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-[7px] font-black uppercase text-gray-400 hover:text-orange-600 transition tracking-tighter underline">
+                                Confirmer la réception ?
+                            </button>
+                        </form>
+                        @endif
                     @else
                     <span class="bg-blue-50 text-blue-500 px-6 py-2 rounded-full text-[8px] font-black uppercase italic tracking-widest border border-blue-100">
                         À récupérer en magasin
